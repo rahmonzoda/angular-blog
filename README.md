@@ -1,4 +1,7 @@
-# angular-blog
-Simple app
+# Simple Web app
 
-slimframework + angularjs + bootstrap 
+## Features
+
+* Slimframework 
+* Angularjs 
+* Bootstrap
