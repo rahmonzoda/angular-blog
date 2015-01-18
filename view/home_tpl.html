@@ -1,0 +1,85 @@
+<div class="page-header">
+  <h1>{{title}} <small>additional texts</small></h1>
+</div>
+
+<div class="row">
+	<div class="col-sm-2">
+		<a href="#/article/edit/0" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Add new</a>
+	</div>
+	<div class="col-sm-4">
+		<input type="text" ng-model="filterArticles" class="form-control" placeholder="Search ({{articles.length}})">
+	</div>
+	<div class="col-sm-6 text-right">
+		<span class="homebtns btn-group">
+			<button type="button" ng-click="view='grid'" class="btn btn-default">
+				<span class="glyphicon glyphicon-th"></span>
+			</button>
+			<button type="button" ng-click="view='list'" class="btn btn-default">
+				<span class="glyphicon glyphicon-list-alt"></span>
+			</button>
+		</span>
+	</div>
+</div>
+<hr>
+
+<div ng-show="articles" class="articles" ng-switch on="view">
+
+	<div ng-switch-when="list">
+		<ul class="list-group">
+		
+			<li class="list-group-item" ng-repeat="acl in articles | filter:filterArticles">
+				<div class="pull-right">
+					<span class="btn-group">
+						<span ng-click="editArticle(acl.id)" class="btn btn-info">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</span>
+						<span ng-click="deleteArticle(acl.id, $index)" class="btn btn-danger">
+							<span class="glyphicon glyphicon-trash"></span>
+						</span>
+					</span>
+				</div>
+				<a href="#/article/{{acl.id}}">
+				<h4>{{acl.title}}</h4>
+				</a>
+				<p>{{acl.description}}</p>
+				<p><span class="glyphicon glyphicon-user"></span> {{acl.name}}</p>
+				<hr>
+			</li>
+		</ul>
+	</div>
+	
+	<div ng-switch-when="grid" class="row">
+		<div class="col-sm-4 item" ng-repeat="acl in articles | filter:filterArticles">
+			<div class="well">
+				<a href="#/article/{{acl.id}}">
+				<h4>{{acl.title}}</h4>
+				</a>
+				<p>{{acl.description}}</p>
+				<div class="clearfix">
+					<div class="pull-left">
+						<p><span class="glyphicon glyphicon-user"></span> {{acl.name}}</p>
+					</div>
+						
+					<div class="pull-right">
+						<span class="btn-group">
+							<span ng-click="editArticle(acl.id)" class="btn btn-info">
+								<span class="glyphicon glyphicon-pencil"></span>
+							</span>
+							<span ng-click="deleteArticle(acl.id, $index)" class="btn btn-danger">
+								<span class="glyphicon glyphicon-trash"></span>
+							</span>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div ng-hide="articles">
+	<div class="text-center">
+		<p></p>
+		<h2>No articles</h2>
+		<a href="#/article/edit/0" class="btn btn-default">Creat new article</a>
+	</div>
+</div>
